@@ -6,7 +6,7 @@
 /*   By: rroignan <rroignan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/15 15:43:29 by rroignan          #+#    #+#             */
-/*   Updated: 2014/11/27 20:20:03 by rroignan         ###   ########.fr       */
+/*   Updated: 2014/12/09 17:52:51 by rroignan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		dst[i + j] = s2[j];
 		j++;
 	}
+	dst[i + j] = '\0';
 	if (j == (l - 1))
 		return (i + ft_strlen(src));
 	else

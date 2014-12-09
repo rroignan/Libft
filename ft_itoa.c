@@ -6,7 +6,7 @@
 /*   By: rroignan <rroignan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 18:22:12 by rroignan          #+#    #+#             */
-/*   Updated: 2014/11/27 11:14:12 by rroignan         ###   ########.fr       */
+/*   Updated: 2014/12/09 17:45:55 by rroignan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static int		str_size(int n)
 
 char			*ft_itoa(int c)
 {
-	char		*str;
-	int			neg;
-	int			i;
+	char	*str;
+	char	*ret;
+	int		neg;
+	int		i;
 
 	neg = 0;
 	if (c == 0)
@@ -40,7 +41,10 @@ char			*ft_itoa(int c)
 		c = c * -1;
 	}
 	if (c == -2147483648)
-		return ("-2147483648");
+	{
+		ret = ft_strdup("-2147483648");
+		return (ret);
+	}
 	i = str_size(c) + neg;
 	str = ft_strnew(i);
 	if (neg == 1)
