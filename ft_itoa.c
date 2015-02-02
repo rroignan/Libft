@@ -6,11 +6,17 @@
 /*   By: rroignan <rroignan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 18:22:12 by rroignan          #+#    #+#             */
-/*   Updated: 2014/12/09 17:45:55 by rroignan         ###   ########.fr       */
+/*   Updated: 2015/02/02 13:53:46 by rroignan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void		ft_negative(int *j, int *k)
+{
+	*j = 1;
+	*k = *k * -1;
+}
 
 static int		str_size(int n)
 {
@@ -27,19 +33,16 @@ static int		str_size(int n)
 
 char			*ft_itoa(int c)
 {
-	char	*str;
-	char	*ret;
-	int		neg;
-	int		i;
+	char		*str;
+	char		*ret;
+	int			neg;
+	int			i;
 
 	neg = 0;
 	if (c == 0)
 		return ("0");
 	else if (c < 0 && c != -2147483648)
-	{
-		neg = 1;
-		c = c * -1;
-	}
+		ft_negative(&neg, &c);
 	if (c == -2147483648)
 	{
 		ret = ft_strdup("-2147483648");
@@ -47,8 +50,7 @@ char			*ft_itoa(int c)
 	}
 	i = str_size(c) + neg;
 	str = ft_strnew(i);
-	if (neg == 1)
-		str[0] = '-';
+	(neg == 1 ? str[0] = '-' : str[0]);
 	while (c > 0)
 	{
 		i--;
