@@ -6,7 +6,7 @@
 /*   By: rroignan <rroignan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 17:43:45 by rroignan          #+#    #+#             */
-/*   Updated: 2014/11/27 20:33:44 by rroignan         ###   ########.fr       */
+/*   Updated: 2015/02/24 19:31:45 by rroignan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strstr(const char *s1, const char *s2);
 char	*ft_strnstr(const char *s1, const char *s2, size_t n);
 char	**ft_strsplit(char const *s, char c);
+void	ft_putstr_ls(char *str);
 
 #endif
