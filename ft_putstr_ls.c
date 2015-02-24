@@ -6,7 +6,7 @@
 /*   By: rroignan <rroignan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 18:12:42 by rroignan          #+#    #+#             */
-/*   Updated: 2015/02/24 18:14:59 by rroignan         ###   ########.fr       */
+/*   Updated: 2015/02/24 19:40:55 by rroignan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_putstr_ls(char *str)
 {
-	ft_putstr(char);
+	ft_putstr(str);
 	ft_putstr("  ");
 }
