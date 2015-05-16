@@ -3,61 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroignan <rroignan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rdantzer <rdantzer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/14 13:01:21 by rroignan          #+#    #+#             */
-/*   Updated: 2014/11/27 17:46:57 by rroignan         ###   ########.fr       */
+/*   Created: 2014/11/12 01:36:48 by rdantzer          #+#    #+#             */
+/*   Updated: 2015/01/29 04:24:55 by rdantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		nbwords(const char *s, char c)
+static size_t	word_count(char const *s, char c)
 {
-	int		i;
-	int		j;
+	int			is_in_word;
+	int			len;
 
-	j = 0;
-	i = 0;
-	while (s[i] != '\0')
+	is_in_word = 0;
+	len = 0;
+	while (*s)
 	{
-		if (s[i] != c)
+		if (is_in_word == 0 && *s != c)
 		{
-			j++;
-			while (s[i] != c)
-				i++;
+			len++;
+			is_in_word = 1;
 		}
-		if (s[i] == c)
-			i++;
+		if (is_in_word && *s == c)
+			is_in_word = 0;
+		s++;
 	}
-	return (j);
+	return (len);
 }
 
-char	**ft_strsplit(char const *s, char c)
+static void		fill_array(char **array, char const *s, char c)
 {
-	char	**tab;
-	int		i;
-	int		size;
-	int		i_word;
+	int			is_in_word;
+	int			start;
+	int			len;
 
-	i = 0;
-	size = 0;
-	i_word = 0;
-	if (!(s && c))
-		return (NULL);
-	if (!(tab = (char **)malloc(sizeof(char *) * (nbwords(s, c) + 1))))
-		return (NULL);
-	while (i == 0 || s[i - 1] != '\0')
+	is_in_word = 0;
+	len = 0;
+	start = 0;
+	while (s[len])
 	{
-		if ((s[i] == c || s[i] == '\0') && size > 0)
+		if (is_in_word == 0 && s[len] != c)
 		{
-			tab[i_word++] = ft_strsub(s, i - size, size);
-			size = 0;
+			is_in_word = 1;
+			start = len;
 		}
-		if (s[i] != c)
-			size++;
-		i++;
+		if (is_in_word && s[len] == c)
+		{
+			is_in_word = 0;
+			*array = ft_strsub(s, start, len - start);
+			++array;
+		}
+		++len;
 	}
-	tab[i_word] = '\0';
-	return (tab);
+	if (is_in_word == 1)
+		*array = ft_strsub(s, start, len - start);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char		**p;
+	size_t		len;
+
+	if (!s)
+		return (0);
+	len = word_count(s, c);
+	p = (char **)malloc(sizeof(char *) * len + 2);
+	if (p)
+		fill_array(p, s, c);
+	p[len] = 0;
+	return (p);
 }
